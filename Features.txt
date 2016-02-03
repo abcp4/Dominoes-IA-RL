@@ -1,6 +1,7 @@
 Características presentes em um jogo 1x1 de Dominó
 Player 1 tem um peça com lado '1'
-Player 1 tem um peça com lado '1'
-Player 1 tem um peça com lado '1'
-Player 1 tem um peça com lado '1'
-Player 1 tem um peça com lado '1'
+Player 1 tem um peça com lado '2'
+Player 1 tem um peça com lado '3'
+Player 1 tem um peça com lado '4'
+Player 1 tem um peça com lado '5'
+Player 1 tem um peça com lado '6'
