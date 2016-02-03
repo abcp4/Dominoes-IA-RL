@@ -6,7 +6,7 @@ import random
 def randomCard():
     card = random.randint(1,13)
     if card > 10:
-        card = 10
+       card = 10
     return card
 
 #A hand is just a tuple e.g. (14, False), a total card value of 14 without a useable ace
