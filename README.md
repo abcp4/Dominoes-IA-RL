@@ -3,6 +3,8 @@ A Dominoes IA by means of Reinforcement Learning
 
 Aplicação de técnicas de aprendizagem por reforço na construção de uma ai para jogar dominó.
 Considera-se a versão mais simples de dominó, onde deve-se se desfazer de todas as peças da mão.
+Existe um total de 28 peças para um jogo entre 2 oponentes, podendo ser apliada a medida que
+se tiver mais jogadores. É Jogado em sentido horário
 O jogo é entre 2 oponentes que devem seguir as regras especificadas abaixo
 
 Configurações do Jogo:
