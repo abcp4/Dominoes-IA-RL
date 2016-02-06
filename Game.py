@@ -19,43 +19,50 @@ def play(state,action):
     #action[0] = se é uma jogada, action[1] = peça em si,
     #action[2]= pos da peça na mão
     if(action[0]==1):
+       
         field_pieces = state.pop(2)
         hand = state.pop(0)
-        piece = action[1]
-        orientation = piece[1]#se é a esq(0) ou dir(1) da peça q importa
-        value = piece[0]
-        piece_value = value[orientation]
-        
+        pos = action[1]
+        if(pos<0 or pos > len(hand)):
+            print "posicao invalida"
+            state.insert(1,field_pieces)    
+            state.insert(0,hand)
+            return state
+       
+        piece = hand[pos]
+        orientation = action[2]#se é a esq(0) ou dir(1) da peça q importa
+        piece_value = piece[orientation]
         if(len(field_pieces)>0):
-            #pega a 1 peça e sua orientação
+            #pega a 1 peça e seu valor a esq
             first = field_pieces[0]
-            first_or = first[1]
-            #pega a ultima peça e sua orientação
+            leftmost_value = first[0]
+            #pega a ultima peça e seu valor a dir
             last = field_pieces[-1]
-            last_or = last[1]
-            if(first_or == 2):#existe so 1 peça, os 2 lados importam
-                first_or = 0
-            if(last_or == 2):
-                last_or = 1
-            if(piece_value==first[first_or] ):
-                hand.remove(piece)
-                if(orientation==0):
-                    piece[1] = 1
+            rightmost_value = last[1]
+            print "piece value ",piece_value
+            print "r ",rightmost_value, " l ", leftmost_value
+            if(piece_value==leftmost_value ):
+                if(orientation == 0):
+                    hand.remove(piece)
+                    new_piece = (piece[1],piece[0]) #recebe peça invertida
+                    field_pieces.insert(0,new_piece)
                 else:
-                    piece[1] = 0
-                field_pieces.insert(0,piece)
-                
-            elif(piece_value == last[last_or]):   
-                hand.remove(piece)
-                if(orientation==0):
-                    piece[1] = 1
+                    hand.remove(piece)
+                    field_pieces.insert(0,piece)
+                                
+            elif(piece_value == rightmost_value): 
+                if(orientation == 1): #recebe peça invertida
+                    hand.remove(piece)
+                    new_piece = (piece[1],piece[0])
+                    field_pieces.append(new_piece)
                 else:
-                    piece[1] = 0
-                field_pieces.append(piece)
+                    hand.remove(piece)
+                    field_pieces.append(piece)
+            else:
+                print "Peça não é válida"
                 
         else:
             hand.remove(piece)
-            piece[1] = 2 # pra esperar ter dir e esq
             field_pieces.insert(0,piece)
             
     state.insert(1,field_pieces)    
@@ -69,7 +76,7 @@ def initGame():
     status = 1 #1=in progress; 2=player won; 3=draw; 4 = dealer won/player loses
     #peca tem seu valor como tupla, e orientacao,
     #por exem: [(1,0),0] = (1,0) e  [(1,0),1] = (0,1)
-    pieces = [[(0,0),0],[(0,1),0],[(0,2),0],[(0,3),0],[(0,4),0],[(0,5),0],[(0,6),0],[(1,1),0],[(1,2),0],[(1,3),0],[(1,4),0],[(1,5),0],[(1,6),0],[(2,2),0],[(2,3),0],[(2,4),0],[(2,5),0],[(2,6),0],[(3,3),0],[(3,4),0],[(3,5),0],[(3,6),0],[(4,4),0],[(4,5),0],[(4,6),0],[(5,5),0],[(5,6),0],[(6,6),0]]
+    pieces = [(0,0),(0,1),(0,2),(0,3),(0,4),(0,5),(0,6),(1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(2,2),(2,3),(2,4),(2,5),(2,6),(3,3),(3,4),(3,5),(3,6),(4,4),(4,5),(4,6),(5,5),(5,6),(6,6)]
     random.shuffle(pieces)
     player_hand = []
     dealer_hand = []
