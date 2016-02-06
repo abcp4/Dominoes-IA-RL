@@ -13,8 +13,39 @@ def take_initial_pieces(hand,pieces):
     return hand
     
     
-def play(state action):
+def play(state,action,pos):
     
+    #play
+    #action[0] = se é uma jogada, action[1] = peça em si,
+    #action[2]= pos da peça na mão
+    if(action[0]==1):
+        field_pieces = state[2]
+        hand = state[0]
+        if(len(field_pieces)>0):
+            first = field_pieces[0]
+            last = field_pieces[-1]
+            piece = action[1]
+            direction = action[2]
+            if(piece[0]==first[direction] ):
+                field_pieces.insert(0,piece)
+                piece[2] = 0
+                hand.remove[pos]
+            elif(piece[1]==first[direction]):
+                field_pieces.insert(0,piece)
+                piece[2] = 1
+                hand.remove[pos]
+            elif(piece[0] == last[direction]):
+                field_pieces.append(piece)
+                piece[2] = 0
+                hand.remove[pos]
+            elif(piece[1] == last[direction]):
+                field_pieces.append(piece)
+                piece[2] = 1
+                hand.remove[pos]
+    state[2] = field_pieces        
+    return state
+        
+    #pass
 
 #Start a game of dominoes, shuffling pieces and giving 7 to each player
 def initGame():
@@ -27,9 +58,6 @@ def initGame():
     player_hand = take_initial_pieces(player_hand,pieces)
     dealer_hand = take_initial_pieces(dealer_hand,pieces)
     field_pieces = []
-    #retorna estado visivel ao jogador:
-    #sua mão,peças no campo(0 inicialmente), estado do jogo 
-    #seria aqui o vetor de caracteristicas? 
-    #tudo que for util para representar o estado?
-    state = (player_hand, field_pieces,status)
+    #retorna estado do jogo total
+    state = (player_hand,dealer_hand,field_pieces,pieces,status)
     return state
