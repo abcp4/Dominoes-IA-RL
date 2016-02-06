@@ -19,7 +19,7 @@ Configurações do Jogo:
 
  
 
-
+É obrigatório que, caso o jogador tenha uma peça válida, seja feito a jogada
 
 fontes:
 http://www.livresportes.com.br/reportagem/domino-a-brincadeira-da-matematica
