@@ -5,5 +5,15 @@ Player 1 tem um peça '1:1'
 ...
 Player 1 tem um peça '6:6'
 
+Campo tem peça '0:0'
+Campo tem peça '0:1'
+Campo tem peça '0:2'
+...
+Campo tem peça '6:6'
 
-
+Ponta esquerda do campo tem valor 0
+...
+Ponta esquerda do campo tem valor 6
+Ponta direita do campo tem valor 0
+...
+Ponta direita do campo tem valor 6
