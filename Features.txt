@@ -17,3 +17,16 @@ Ponta esquerda do campo tem valor 6
 Ponta direita do campo tem valor 0
 ...
 Ponta direita do campo tem valor 6
+
+
+Mão do jogador1 tem 3+ peças de lado '0'
+...
+Mão do jogador1 tem 3+ peças de lado '6'
+
+Mão do jogador1 tem 1 peça de lado '0'
+...
+Mão do jogador1 tem 1 peça de lado '6'
+
+Mão do jogador1 tem 0 peças de lado '0'
+...
+Mão do jogador1 tem 0 peças de lado '6'
