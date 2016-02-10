@@ -37,8 +37,7 @@ def playGame(state, p_index):
         field.append(p)
         p1_hand.remove(p)
         if (l_end==-1 & r_end==-1):
-            l_end=p[0]
-            r_end=p[1]
+            l_end, r_end = p
         elif (l_end==p[0]):
             l_end=p[1]
         elif (l_end==p[1]):
@@ -47,6 +46,6 @@ def playGame(state, p_index):
             r_end=p[1]
         elif (r_end==p[1]):
             r_end=p[0]
-        #a partir daqui Ã© a escolha do oponente
+        #a partir daqui eh a escolha do oponente
     state = [status, p1_hand, p2_hand, field, l_end, r_end]
     return state
