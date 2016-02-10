@@ -36,7 +36,7 @@ def playGame(state, p_index):
         p = p1_hand[p_index]
         field.append(p)
         p1_hand.remove(p)
-        if (l_end==-1 & r_end==-1):
+        if (l_end==-1 and r_end==-1):
             l_end, r_end = p
         elif (l_end==p[0]):
             l_end=p[1]
