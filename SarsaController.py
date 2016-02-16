@@ -1,4 +1,9 @@
-class SARSA(ValueBasedLearner):
+
+
+
+        
+
+class SARSA():
     """ State-Action-Reward-State-Action (SARSA) algorithm.
     In batchMode, the algorithm goes through all the samples in the
     history and performs an update on each of them. if batchMode is
@@ -10,7 +15,6 @@ class SARSA(ValueBasedLearner):
     batchMode = True
 
     def __init__(self, alpha=0.5, gamma=0.99):
-        ValueBasedLearner.__init__(self)
 
         self.alpha = alpha
         self.gamma = gamma
@@ -18,6 +22,16 @@ class SARSA(ValueBasedLearner):
         self.laststate = None
         self.lastaction = None
 
+    def qvalue(featureVals):
+        tot = 0
+        it1 = np.nditer(featureVals, flags=['f_index'])
+        it2 = np.nditer(featureWeigths, flags=['f_index'])
+        while not it1.finished:
+            tot += it1[0]*it2[0]
+            it1.iternext()
+            it2.iternext()
+        
+    return tot
     def learn(self):
         if self.batchMode:
             samples = self.dataset
