@@ -8,7 +8,8 @@ class Features:
     #valida caracteristicas de acordo com o estado submetido e as retorna
     def featureValues(state):
         result =  np.zeros(numFeatures)
-        print state
+        
+        return result
 
 def rand_winner (S_from, beta):
     sum = 0.0
@@ -34,10 +35,8 @@ def rand_winner (S_from, beta):
 
 
 
-size_a, size_b = 16, 16
-size_map = size_a * size_b
-size_mot = 4
-featureWeights = numpy.random.uniform (0.0, 0.0, (size_mot, size_map))
+num_features = 60
+featureWeights = np.zeros(numFeatures)
 
 beta = 50.0
 features = Features()
@@ -50,26 +49,23 @@ for iter in range (10000):
     val = numpy.dot (featureWeights, featureVals)                     # value before action
     r = 0
     duration = 0
-    termination = 0
-    while termination == 0:
+    while dominoes.termination() == 0:
 
-        duration += 1
-        world.act(act)                                  # do selected action
-        r = world.reward()                              # read reward
-        I_tic = world.sensor()                          # read new state
+        dominoes.act(act)                                  # do selected action
+        r = dominoes.reward()                              # read reward
+
+        next_state = dominoes.state()                   # read new state
+        next_action = policyAct (state)                  # choose next action
 
         
-        act_tic = rand_winner (h, beta)                 # choose next action
 
-        act_vec = numpy.zeros (size_mot)
-        act_vec[act] = 1.0
-
-        val_tic = numpy.dot (w_mot[act_tic], I_tic)     # value after action
-        target = r+ 0.9 * val_tic                     # gamma = 0.9
+        new_value = numpy.dot (featureWeights, featureVals)     # value after action
+        target = r+ 0.9 * new_value                     # gamma = 0.9
         delta = target - val                            # prediction error
 
-        w_mot += 0.5 * delta * numpy.outer (act_vec, I) #pra cada peso no array de caracteristicas aplica o gradient descent update
+        featureWeights += 0.5 * delta * numpy.outer (act_vec, I) #pra cada peso no array de caracteristicas aplica o gradient descent update
 
-        val = val_tic
-        act = act_tic
+        state = next)state
+        val = new_value
+        act = next_action
         
