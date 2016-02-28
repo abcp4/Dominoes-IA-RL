@@ -11,10 +11,21 @@ class Features:
         
         return result
 
-def policyAct(state):
+def policyAct(state,features):
     #constroi acoes possiveis a partir do estado
+    #Ações são vistas como o que o agente pode 'querer'
+    #Ex: Pontas: 5 - 5
+    # Mão: (0,5),(1,2),(5,5),(3,5),(0,2)
+    #Ações possíveis(que o agente pode querer):
+    #   (0,esq),(5,esq),(3,esq)
+    #ele pode querer ter um 0 na esquerda, ou um 5 na esquerda, ou um 3 na esquerda
+    #veja que ele poderia querer ter um 5 do (5,5) na dir, ou o 3 do (3,5) na dir,
+    # mas isso não influenciaria em nada, então a esquerda é sempre eleita automaticamente.
+    #Ex2: Pontas 5-0
+    #Mão
+    
     #escolhe a partir dos valores na q-value com de e-greedy
-
+    
     return action
 
 num_features = 60
@@ -37,7 +48,7 @@ for iter in range (10000):
         r = dominoes.reward()                              # read reward
 
         next_state = dominoes.state()                   # read new state
-        next_action = policyAct (state)                  # choose next action
+        next_action = policyAct (state,features)                  # choose next action
 
         
 
