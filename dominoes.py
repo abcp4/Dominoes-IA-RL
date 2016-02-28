@@ -12,6 +12,9 @@ def buy(hand, n, pieces):
     
 #recebe estado do jogo, retorna ações possíveis
 def possibleActions(state):
+    l_end = state[4]
+    r_end = state[5]	
+
 	
 
 def startGame():
