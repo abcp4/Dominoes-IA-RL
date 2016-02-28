@@ -2,6 +2,8 @@ import math
 import random
 from random import shuffle
 
+#O ambiente pode ser feito em puro python, não precisa de alto tempo de resposta, nem faz processamento pesado
+
 def buy(hand, n, pieces):
     i = 0
     while i<n:
@@ -14,7 +16,35 @@ def buy(hand, n, pieces):
 def possibleActions(state):
     l_end = state[4]
     r_end = state[5]	
-
+    hand = state[1]
+    actions = []
+    for piece in hand:
+    #peça dupla
+    if(piece[0]==piece[1]):
+        if(piece[0]==l_end):
+            actions.append((piece[1],"left"))
+        elif(piece[1]==r_end):
+            actions.append((piece[0],"right"))
+        continue
+    
+    if(piece[0]==l_end):
+    	actions.append((piece[1],"left"))
+        if(l_end==r_end): #evitar duplicacao de mesmas ações na esq e dir
+            continue
+    if(piece[1]==l_end):
+    	actions.append((piece[0],"left"))
+        if(l_end==r_end):
+            continue
+    
+    if(piece[0]==r_end):
+    	actions.append((piece[1],"right"))
+        if(l_end==r_end):
+            continue
+    if(piece[1]==r_end):
+    	actions.append((piece[0],"right"))
+        if(l_end==r_end):
+            continue
+    		
 	
 
 def startGame():
