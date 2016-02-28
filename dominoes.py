@@ -9,6 +9,10 @@ def buy(hand, n, pieces):
         i=i+1
     del pieces[0:n]
     return hand
+    
+#recebe estado do jogo, retorna ações possíveis
+def possibleActions(state):
+	
 
 def startGame():
     status = 1 #1=in progress; 2=player won; 3=draw; 4 = dealer won/player loses
