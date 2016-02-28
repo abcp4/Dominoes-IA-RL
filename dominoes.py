@@ -18,32 +18,35 @@ def possibleActions(state):
     r_end = state[5]	
     hand = state[1]
     actions = []
+    
+    index = 0
     for piece in hand:
+    	index +=1
     #peça dupla
-    if(piece[0]==piece[1]):
-        if(piece[0]==l_end):
-            actions.append((piece[1],"left"))
-        elif(piece[1]==r_end):
-            actions.append((piece[0],"right"))
-        continue
+    	if(piece[0]==piece[1]):
+        	if(piece[0]==l_end):
+                	actions.append((piece[1],"left"))
+        	elif(piece[1]==r_end):
+            		actions.append((piece[0],"right"))
+        	continue
     
-    if(piece[0]==l_end):
-    	actions.append((piece[1],"left"))
-        if(l_end==r_end): #evitar duplicacao de mesmas ações na esq e dir
-            continue
-    if(piece[1]==l_end):
-    	actions.append((piece[0],"left"))
-        if(l_end==r_end):
-            continue
+    	if(piece[0]==l_end):
+    		actions.append((piece[1],"left"))
+        	if(l_end==r_end): #evitar duplicacao de mesmas ações na esq e dir
+            		continue
+    	if(piece[1]==l_end):
+    		actions.append((piece[0],"left"))
+        	if(l_end==r_end):
+        		continue
     
-    if(piece[0]==r_end):
-    	actions.append((piece[1],"right"))
-        if(l_end==r_end):
-            continue
-    if(piece[1]==r_end):
-    	actions.append((piece[0],"right"))
-        if(l_end==r_end):
-            continue
+    	if(piece[0]==r_end):
+    		actions.append((piece[1],"right"))
+        	if(l_end==r_end):
+            		continue
+    	if(piece[1]==r_end):
+    		actions.append((piece[0],"right"))
+        	if(l_end==r_end):
+            		continue
     		
 	
 
@@ -59,7 +62,7 @@ def startGame():
     state = [status, p1_hand, p2_hand, field, l_end, r_end]
     return state
 
-def playGame(state, p_index):
+def playGame(state, p_index,orientation):
     status = state[0]
     p1_hand = state[1]
     p2_hand = state[2]
@@ -68,20 +71,18 @@ def playGame(state, p_index):
     r_end = state[5]
 
     if status==1:
-        #assumindo que p_index foi escolhido corretamente por outra funcao
-	#o certo seria chamar a funcao que escolhe p_index aqui, mas como ela nao foi feita, fica essa gambiarra ae :P
         p = p1_hand[p_index]
         field.append(p)
         p1_hand.remove(p)
         if (l_end==-1 and r_end==-1):
             l_end, r_end = p
-        elif (l_end==p[0]):
+        elif (l_end==p[0] and orientation == 0):
             l_end=p[1]
-        elif (l_end==p[1]):
+        elif (l_end==p[1] and orientation == 1):
             l_end=p[0]
-        elif (r_end==p[0]):
+        elif (r_end==p[0] and orientation == 0):
             r_end=p[1]
-        elif (r_end==p[1]):
+        elif (r_end==p[1] and orientation == 1):
             r_end=p[0]
         #a partir daqui eh a escolha do oponente
     state = [status, p1_hand, p2_hand, field, l_end, r_end]
