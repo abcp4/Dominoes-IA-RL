@@ -18,7 +18,8 @@ def possibleActions(state):
     r_end = state[5]	
     hand = state[1]
     actions = []
-    
+    actions_index = []
+    actionSet= []
     index = 0
     for piece in hand:
     	index +=1
@@ -26,29 +27,36 @@ def possibleActions(state):
     	if(piece[0]==piece[1]):
         	if(piece[0]==l_end):
                 	actions.append((piece[1],"left"))
+                	actions_index.append((index,1))
         	elif(piece[1]==r_end):
             		actions.append((piece[0],"right"))
+            		actions_index.append((index,0))
         	continue
     
     	if(piece[0]==l_end):
     		actions.append((piece[1],"left"))
+    		actions_index.append((index,1))
         	if(l_end==r_end): #evitar duplicacao de mesmas ações na esq e dir
             		continue
     	if(piece[1]==l_end):
     		actions.append((piece[0],"left"))
+    		actions_index.append((index,0))
         	if(l_end==r_end):
         		continue
     
     	if(piece[0]==r_end):
     		actions.append((piece[1],"right"))
+    		actions_index.append((index,1))
         	if(l_end==r_end):
             		continue
     	if(piece[1]==r_end):
     		actions.append((piece[0],"right"))
+    		actions_index.append((index,0))
         	if(l_end==r_end):
             		continue
-    		
-	
+       
+    actionSet = [actions,actions_index]		
+    return actionSet
 
 def startGame():
     status = 1 #1=in progress; 2=player won; 3=draw; 4 = dealer won/player loses
