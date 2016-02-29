@@ -85,7 +85,9 @@ def startGame():
     state = [status, p1_hand, p2_hand, field, l_end, r_end]
     return state
 
-def playGame(state, p_index,orientation):
+def playGame(state,action):
+    p_index = action[0]
+    orientation = action[1]
     status = state[0]
     p1_hand = state[1]
     p2_hand = state[2]
@@ -99,7 +101,7 @@ def playGame(state, p_index,orientation):
         p1_hand.remove(p)
         if (l_end==-1 and r_end==-1):
             l_end, r_end = p
-        elif (l_end==p[0] and orientation == 1):#orientation e o lado da peça desejado a ficar na ponta
+        elif (l_end==p[0] and orientation == 1):#ori e o lado desejado a manter na ponta
             l_end=p[1]
         elif (l_end==p[1] and orientation == 0):
             l_end=p[0]
