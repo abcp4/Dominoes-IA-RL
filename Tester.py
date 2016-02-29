@@ -1,6 +1,11 @@
 state = initGame()
 print state[0]
-action = [1,0,0] #se é jogada,pos da peça na mão, lado da peça
-play(state,action)
-print "hand after: ", state[0]
-print "field after: ", state[2]
+actionSet=possibleActions(state)#pede uma lista de ações possiveis
+actions_index = actionSet[1]
+state = playGame(state,actions_index[0])#joga uma das ações possiveis, no começo sao todas
+print state
+actionSet=possibleActions(state)#pede uma lista de ações possiveis
+actions_index = actionSet[1]
+print actions_index
+state = playGame(state,actions_index[0])#joga uma das ações possiveis
+print state
