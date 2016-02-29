@@ -13,12 +13,23 @@ def buy(hand, n, pieces):
     return hand
     
 #recebe estado do jogo, retorna ações possíveis
-def possibleActions():
+def possibleActions(state):
+    hand = state[1]
+    l_end = state[4]
+    r_end = state[5]
     actions = []
     actions_index = []
     actionSet= []
     index = -1
-
+    
+    if(l_end==-1):
+        for piece in hand:
+            index +=1
+            actions.append((piece[1],"left"))
+            actions_index.append((index,1)) 
+        actionSet = [actions,actions_index]
+        return actionSet
+    
     for piece in hand:
         index +=1
         #peça dupla
@@ -50,7 +61,7 @@ def possibleActions():
             actions_index.append((index,0))
             if(l_end==r_end):
                 continue
-    ''''
+    '''
     actions_index se refere a nova ponta na mesa:
     exemplo: campo 1-5 , mão : (1,2),(5,5)
     nesse caso a peça (1,2) se encaixa no lado esquerdo, sendo
@@ -58,7 +69,7 @@ def possibleActions():
     0 é a posição da tupla na mão, e o 1 representa a posição na tupla,
     que no caso é o direito
     
-    ''''
+    '''
     actionSet = [actions,actions_index]
     return actionSet
     
@@ -88,13 +99,13 @@ def playGame(state, p_index,orientation):
         p1_hand.remove(p)
         if (l_end==-1 and r_end==-1):
             l_end, r_end = p
-        elif (l_end==p[0] and orientation == 0):
+        elif (l_end==p[0] and orientation == 1):#ori e o lado desejado a manter na ponta
             l_end=p[1]
-        elif (l_end==p[1] and orientation == 1):
+        elif (l_end==p[1] and orientation == 0):
             l_end=p[0]
-        elif (r_end==p[0] and orientation == 0):
+        elif (r_end==p[0] and orientation == 1):
             r_end=p[1]
-        elif (r_end==p[1] and orientation == 1):
+        elif (r_end==p[1] and orientation == 0):
             r_end=p[0]
         #a partir daqui eh a escolha do oponente
     state = [status, p1_hand, p2_hand, field, l_end, r_end]
