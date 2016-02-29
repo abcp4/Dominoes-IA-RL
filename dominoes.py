@@ -99,7 +99,7 @@ def playGame(state, p_index,orientation):
         p1_hand.remove(p)
         if (l_end==-1 and r_end==-1):
             l_end, r_end = p
-        elif (l_end==p[0] and orientation == 1):#ori e o lado desejado a manter na ponta
+        elif (l_end==p[0] and orientation == 1):#orientation e o lado da peça desejado a ficar na ponta
             l_end=p[1]
         elif (l_end==p[1] and orientation == 0):
             l_end=p[0]
