@@ -26,9 +26,9 @@ class Features:
         
         result[0] = hasOneDouble(state)
         result[1] = blocksMe(state,action)#impossibilita qualquer peça de ser jogada
-        result[2] = enableNumActions(state,action,1)
-        result[3] = enableNumActions(state,action,2)
-        result[4] = enableNumAndMoreActions(state,action,3)#possibilita 3 ou mais peças de serem jogáveis
+        result[2] = NumActions(state,action,1)#retorna true se o num de ações disp após essa ação for 1
+        result[3] = NumActions(state,action,2)
+        result[4] = NumActionsSince(state,action,3)#possibilita 3 ou mais peças de serem jogáveis
         for i in range(7):
             #quais peças duplas temos na mão, de 0:0 a 6:6
             result[i] = hasDouble(i)
@@ -43,7 +43,57 @@ class Features:
         
         
         return result
-
+    
+    def hasOneDouble(state):
+        hand = state[1]
+        for piece in hand:
+            if(piece[0] == piece[1]):
+                return True
+        return False
+    
+    def blocksMe(state,action):
+        l_end = state[4]
+        r_end = state[5]
+        hand = state[1]
+        substituteForNewPiece(action,hand,l_end,r_end)
+        
+        for piece in hand:
+            if(isPlayable(piece,l_end,r_end)):
+                #se encontra alguma peça valida na mao
+                return False # então ainda não estou bloqueado
+  
+        return True #nao encontrou
+        
+    def NumActions(state,action,num):
+        hand = state[1]
+        substituteForNewPiece(action,hand,l_end,r_end)
+        count = 0
+        for piece in hand:
+            if(isPlayable(piece,l_end,r_end)):
+                count = count+1
+            if(count>num):#se tem mais que o numero de peças designado
+                return False
+        return True #se tem exatamente aquele numero
+        
+    def NumActionsSince(state,action,num):
+        
+               
+               
+    def isPlayable(piece,l_end,r_end):#se dado a peça e as duas pontas, ela é jogavel
+        if(piece[0]==l_end or piece[0]==r_end or piece[1]==l_end or piece[1]==r_end):
+               return True
+        return False
+    
+    def substituteForNewPiece(action,hand,l_end,r_end):#funcao util para ver campo apos ação
+        if(action[1]=="left"): #substitui uma das pontas pela nova ação
+            l_end = action[0]
+        elif:
+            r_end = action[0]
+        pos = action[2]
+        hand.pop(pos)#remove a ação(peça) da mão
+        
+    
+               
 def qValue(state,act):
     featureVals = features.featuresValue(state,act)
     val = numpy.dot (featureWeights, featureVals)    # value before action
@@ -89,8 +139,7 @@ def policyAct(state):
     para um arranjo e na dir para outro, deveriam equivaler ao mesmo valor na q-function, mas não o tem.
 
     """
-    SetActions = dominoes.possibleActions(state)
-    actions = SetActions[0]
+    actions = dominoes.possibleActions(state)
     #escolhe a partir dos valores na q-value com tecnica e-greedy
     choosenAct = eGreedyPicker(actions,state)
     
