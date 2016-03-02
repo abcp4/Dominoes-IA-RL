@@ -18,51 +18,41 @@ def possibleActions(state):
     l_end = state[4]
     r_end = state[5]
     actions = []
-    actions_index = []
-    actionSet= []
     index = -1
     
     if(l_end==-1):
         for piece in hand:
             index +=1
-            actions.append((piece[1],"left"))
-            actions_index.append((index,1)) 
-        actionSet = [actions,actions_index]
-        return actionSet
+            actions.append((piece[1],"left",index,1))
+        return actions
     
     for piece in hand:
         index +=1
         #peça dupla
         if(piece[0]==piece[1]):
             if(piece[0]==l_end):
-                actions.append((piece[1],"left"))
-                actions_index.append((index,1))
+                actions.append((piece[1],"left",index,1))
             elif(piece[1]==r_end):
-                actions.append((piece[0],"right"))
-                actions_index.append((index,0))
+                actions.append((piece[0],"right",index,0))
             continue
         if(piece[0]==l_end):
-            actions.append((piece[1],"left"))
-            actions_index.append((index,1))
+            actions.append((piece[1],"left",index,1))
             if(l_end==r_end): #evitar duplicacao de mesmas ações na esq e dir
                 continue
         if(piece[1]==l_end):
-            actions.append((piece[0],"left"))
-            actions_index.append((index,0))
+            actions.append((piece[0],"left",index,0))
             if(l_end==r_end):
                 continue
         if(piece[0]==r_end):
-            actions.append((piece[1],"right"))
-            actions_index.append((index,1))
+            actions.append((piece[1],"right",index,1))
             if(l_end==r_end):
                 continue
         if(piece[1]==r_end):
-            actions.append((piece[0],"right"))
-            actions_index.append((index,0))
+            actions.append((piece[0],"right",index,0))
             if(l_end==r_end):
                 continue
     '''
-    actions_index se refere a nova ponta na mesa:
+    pos 2 e 3 no actions se referem a nova ponta na mesa:
     exemplo: campo 1-5 , mão : (1,2),(5,5)
     nesse caso a peça (1,2) se encaixa no lado esquerdo, sendo
     a nova ponta esquerda o 2. A representação será: (0,1), pois
@@ -70,8 +60,7 @@ def possibleActions(state):
     que no caso é o direito
     
     '''
-    actionSet = [actions,actions_index]
-    return actionSet
+    return actions
     
 def startGame():
     status = 1 #1=in progress; 2=player won; 3=draw; 4 = dealer won/player loses
