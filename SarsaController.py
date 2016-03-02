@@ -3,15 +3,67 @@ import numpy
 import scipy
 
 
+e = 0.01 # epsilon-greedy proportion
+
+num_features = 60
+featureWeights = np.zeros(numFeatures)
+
+beta = 50.0
+features = Features()
+
+
 class Features:
     numFeatures = 60
-    #valida caracteristicas de acordo com o estado submetido e as retorna
-    def featureValues(state):
+    
+    def featureValues(state,action):
+        """"
+        Características a partir de informações imperfeitas.
+            Somente do que é visível a um jogador comum:
+                Campo, peças de suas mãos, quantidade de peças do oponente
+        """"
+        #valida caracteristicas de acordo com o estado submetido e as retorna
         result =  np.zeros(numFeatures)
+        
+        result[0] = hasOneDouble(state)
+        result[1] = blocksMe(state,action)#impossibilita qualquer peça de ser jogada
+        result[2] = enableNumActions(state,action,1)
+        result[3] = enableNumActions(state,action,2)
+        result[4] = enableNumAndMoreActions(state,action,3)#possibilita 3 ou mais peças de serem jogáveis
+        for i in range(7):
+            #quais peças duplas temos na mão, de 0:0 a 6:6
+            result[i] = hasDouble(i)
+        
+        
+        """"
+        Características a partir de informações perfeitas.
+        Sabe-se da mão do oponente, de toda e qualquer informação necessária
+        para se tomar uma decisão
+        """"
+        
+        
         
         return result
 
-def policyAct(state,features):
+def qValue(state,act):
+    featureVals = features.featuresValue(state,act)
+    val = numpy.dot (featureWeights, featureVals)    # value before action
+    return val
+        
+def eGreedyPicker(actions,state):
+    rand = np.random.random_sample()
+    bestValue = 0
+    if(rand > e):
+        for act in actions:
+            value = qValue(state,act)
+            if(value> bestValue):
+                bestValue = value
+        choosenAct = bestValue
+    else:
+        choosenAct = random.choice(actions)
+        
+    return choosenAct
+
+def policyAct(state):
     """
     Constroi acões possiveis a partir do estado
     Ações são vistas como o que o agente pode 'querer'
@@ -37,23 +89,19 @@ def policyAct(state,features):
     para um arranjo e na dir para outro, deveriam equivaler ao mesmo valor na q-function, mas não o tem.
 
     """
+    SetActions = dominoes.possibleActions(state)
+    actions = SetActions[0]
+    #escolhe a partir dos valores na q-value com tecnica e-greedy
+    choosenAct = eGreedyPicker(actions,state)
     
-    #escolhe a partir dos valores na q-value com de e-greedy
-    
-    return action
+    return choosenAct
 
-num_features = 60
-featureWeights = np.zeros(numFeatures)
-
-beta = 50.0
-features = Features()
 
 for iter in range (10000):
     
     state = dominoes.startGame() 
     act = policyAct (state)                         # take action by a e-greedy policy
-    featureVals = features.featuresValue(state)
-    val = numpy.dot (featureWeights, featureVals)                     # value before action
+    val = qValue(state,act)
     r = 0
     duration = 0
     while dominoes.termination() == 0:
@@ -62,7 +110,7 @@ for iter in range (10000):
         r = dominoes.reward()                              # read reward
 
         next_state = dominoes.state()                   # read new state
-        next_action = policyAct (state,features)                  # choose next action
+        next_action = policyAct(state)                  # choose next action
 
         
 
@@ -72,7 +120,7 @@ for iter in range (10000):
 
         featureWeights += 0.5 * delta * numpy.outer (act_vec, I) #pra cada peso no array de caracteristicas aplica o gradient descent update
 
-        state = next)state
+        state = next_state
         val = new_value
         act = next_action
         
