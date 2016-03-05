@@ -2,8 +2,6 @@ import math
 import random
 from random import shuffle
 
-#O ambiente pode ser feito em puro python, não precisa de alto tempo de resposta, nem faz processamento pesado
-
 def buy(hand, n, pieces):
     i = 0
     while i<n:
@@ -61,7 +59,7 @@ def possibleActions(state):
     
     '''
     return actions
-    
+     
 def startGame():
     status = 1 #1=in progress; 2=player won; 3=draw; 4 = dealer won/player loses
     pieces = [(x,y) for x in range(7) for y in range(x,7)]
@@ -75,8 +73,8 @@ def startGame():
     return state
 
 def playGame(state,action):
-    p_index = action[0]
-    orientation = action[1]
+    p_index = action[2]
+    orientation = action[3]
     status = state[0]
     p1_hand = state[1]
     p2_hand = state[2]
@@ -101,3 +99,4 @@ def playGame(state,action):
         #a partir daqui eh a escolha do oponente
     state = [status, p1_hand, p2_hand, field, l_end, r_end]
     return state
+
