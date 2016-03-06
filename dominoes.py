@@ -12,16 +12,17 @@ def buy(hand, n, pieces):
     
 #recebe estado do jogo, retorna ações possíveis
 def possibleActions(state):
+    status = state[0]
     hand = state[1]
     l_end = state[4]
     r_end = state[5]
     actions = []
     index = -1
     
-    if(l_end==-1):
+    if(l_end==r_end==-1):
         for piece in hand:
             index +=1
-            actions.append((piece[1],"left",index,1))
+            actions.append((piece[1],"left",piece[0],"right",index,1))
         return actions
     
     for piece in hand:
@@ -59,9 +60,47 @@ def possibleActions(state):
     
     '''
     return actions
-     
+
+def termination(state):#se a partida ja terminou
+    status = state[0]
+    p1_hand = state[1]
+    p2_hand = state[2]
+    l_end = state[4]
+    r_end = state[5]
+    if (status == 3):
+        return True  
+    return False
+
+def reward(state,id):#recompensa por estar nesse estado
+    #em caso de vitoria
+    status = state[0]
+    
+    if(status == 1):
+        return 0
+    if(status == 3):
+        p1_hand = state[1]
+        p2_hand = state[2]
+        lowest_piece = 12
+        for piece in p1_hand:
+            value = piece[0]+piece[1]
+            if(value < lowest_piece):
+                lowest_piece = value
+        for piece in p2_hand:
+            value = piece[0]+piece[1]
+            if(value < lowest_piece):
+                state[0] = 5 #player 2 venceu tendo a menor peça no block
+                if(id == "p1"):
+                    return -5 #recompensa negativa ao p1 pois perdeu
+                else:
+                    return +5 #recompensa positiva ao p2 pois venceu
+        state[0] = 4
+        if(id == "p1"):
+            return +5 #recompensa negativa ao p1 pois venceu
+        else:
+            return -5 #recompensa positiva ao p2 pois perdeu
+
 def startGame():
-    status = 1 #1=in progress; 2=player won; 3=draw; 4 = dealer won/player loses
+    status = 1 #1=in progress; 2=one player blocked;3=two players blocked;4/5=p1 won/p2 won
     pieces = [(x,y) for x in range(7) for y in range(x,7)]
     random.shuffle(pieces)
     p1_hand = buy([],7,pieces)
@@ -72,16 +111,28 @@ def startGame():
     state = [status, p1_hand, p2_hand, field, l_end, r_end]
     return state
 
-def playGame(state,action):
-    p_index = action[2]
-    orientation = action[3]
+def playGame(state,action): 
     status = state[0]
     p1_hand = state[1]
     p2_hand = state[2]
     field = state[3]
     l_end = state[4]
     r_end = state[5]
-
+    
+    if(action is None):#foi bloqueado
+        if(status == 2):
+            state[0] = 3
+        elif(status == 1):
+            state[0] = 2
+        return state
+        
+    if(l_end==r_end==-1):
+        p_index = action[4]
+        orientation = action[5]
+    else:
+        p_index = action[2]
+        orientation = action[3]
+        
     if status==1:
         p = p1_hand[p_index]
         field.append(p)
@@ -96,7 +147,7 @@ def playGame(state,action):
             r_end=p[1]
         elif (r_end==p[1] and orientation == 0):
             r_end=p[0]
-        #a partir daqui eh a escolha do oponente
+    
     state = [status, p1_hand, p2_hand, field, l_end, r_end]
     return state
 
