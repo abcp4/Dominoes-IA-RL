@@ -4,7 +4,7 @@ from random import shuffle
 
 class Domino:
     
-    def buy(hand, n, pieces):
+    def buy(self,hand, n, pieces):
         i = 0
         while i<n:
             hand.append(pieces[i])
@@ -13,7 +13,7 @@ class Domino:
         return hand
 
     #recebe estado do jogo, retorna ações possíveis
-    def possibleActions(state):
+    def possibleActions(self,state):
         status = state[0]
         hand = state[1]
         l_end = state[4]
@@ -63,7 +63,7 @@ class Domino:
         '''
         return actions
 
-    def termination(state):#se a partida ja terminou
+    def termination(self,state):#se a partida ja terminou
         status = state[0]
         p1_hand = state[1]
         p2_hand = state[2]
@@ -73,7 +73,7 @@ class Domino:
             return True  
         return False
 
-    def reward(state,id):#recompensa por estar nesse estado
+    def reward(self,state,id):#recompensa por estar nesse estado
         #em caso de vitoria
         status = state[0]
 
@@ -113,19 +113,19 @@ class Domino:
             else:
                 return +5 #recompensa positiva ao p2 pois venceu
 
-    def startGame():
+    def startGame(self):
         status = 1 #1=in progress; 2=one player blocked;3=two players blocked;4/5=p1 won/p2 won
         pieces = [(x,y) for x in range(7) for y in range(x,7)]
         random.shuffle(pieces)
-        p1_hand = buy([],7,pieces)
-        p2_hand = buy([],7,pieces)
+        p1_hand = self.buy([],7,pieces)
+        p2_hand = self.buy([],7,pieces)
         field = []
         l_end = -1
         r_end = -1
         state = [status, p1_hand, p2_hand, field, l_end, r_end]
         return state
 
-    def playGame(state,action): 
+    def playGame(self,state,action): 
         status = state[0]
         p1_hand = state[1]
         p2_hand = state[2]
