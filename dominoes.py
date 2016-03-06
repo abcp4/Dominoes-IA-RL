@@ -128,8 +128,10 @@ class Domino:
         state = [status, p1_hand, p2_hand, field, l_end, r_end]
         return state
 
-    def playGame(self,state,action,player): 
+    def playGame(self,state,action,player):
         status = state[0]
+        if(status >= 3): #jogo acabou
+            return state
         if(player =="p1"):
             hand = state[1]
         else:
@@ -153,20 +155,15 @@ class Domino:
             p_index = action[2]
             orientation = action[1]
 
-        if status==1:
-            p = hand[p_index]
-            field.append(p)
-            hand.remove(p)
-            if (l_end==-1 and r_end==-1):
-                l_end, r_end = p
-            elif (l_end==p[0] and orientation == "right"):#ori e o lado desejado a manter na ponta
-                l_end=p[1]
-            elif (l_end==p[1] and orientation == "left"):
-                l_end=p[0]
-            elif (r_end==p[0] and orientation == "right"):
-                r_end=p[1]
-            elif (r_end==p[1] and orientation == "left"):
-                r_end=p[0]
+        p = hand[p_index]
+        field.append(p)
+        hand.remove(p)
+        if (l_end==-1 and r_end==-1):
+            l_end, r_end = p
+        elif (orientation == "right"):#ori e o lado desejado a manter na ponta
+            r_end=action[0]
+        elif (orientation == "left"):
+            l_end=action[0]
                 
         if(player =="p1"):
             state[1] = hand
