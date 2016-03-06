@@ -98,6 +98,18 @@ def reward(state,id):#recompensa por estar nesse estado
             return +5 #recompensa negativa ao p1 pois venceu
         else:
             return -5 #recompensa positiva ao p2 pois perdeu
+        
+        #evitar recalcular menor peça
+    elif(status == 4):
+        if(id == "p1"):
+            return +5 #recompensa negativa ao p1 pois venceu
+        else:
+            return -5 #recompensa positiva ao p2 pois perdeu
+    elif(status == 5):
+        if(id == "p1"):
+            return -5 #recompensa negativa ao p1 pois perdeu
+        else:
+            return +5 #recompensa positiva ao p2 pois venceu
 
 def startGame():
     status = 1 #1=in progress; 2=one player blocked;3=two players blocked;4/5=p1 won/p2 won
