@@ -1,7 +1,5 @@
 import random
 import numpy as np
-import scipy
-import Dominoes as dominoes
 
 
 e = 0.01 # epsilon-greedy proportion
@@ -20,8 +18,10 @@ class Features:
         pos = action[2]
         result =  np.zeros(numFeatures)
         if(l_end==r_end==-1):
-            return result
-        if(action[1]=="left"):
+            pos = action[4]
+            l_end = action[0]
+            r_end = action[2]
+        elif(action[1]=="left"):
         #substitui uma das pontas pela nova ação
             l_end = action[0]
         else:
@@ -98,7 +98,7 @@ class Features:
 features = Features()
 
 def qValue(state,act):
-    featureVals = features.featuresValue(state,act)
+    featureVals = features.featureValues(state,act)
     val = numpy.dot (featureWeights, featureVals)    # value before action
     return val
         
