@@ -24,7 +24,7 @@ class Domino:
         if(l_end==r_end==-1):
             for piece in hand:
                 index +=1
-                actions.append((piece[1],"left",piece[0],"right",index,1))
+                actions.append((piece[0],piece[1],"left",index))
             return actions
 
         for piece in hand:
@@ -32,24 +32,24 @@ class Domino:
             #peça dupla
             if(piece[0]==piece[1]):
                 if(piece[0]==l_end):
-                    actions.append((piece[1],"left",index,1))
+                    actions.append((piece[1],"left",index))
                 elif(piece[1]==r_end):
-                    actions.append((piece[0],"right",index,0))
+                    actions.append((piece[0],"right",index))
                 continue
             if(piece[0]==l_end):
-                actions.append((piece[1],"left",index,1))
+                actions.append((piece[1],"left",index))
                 if(l_end==r_end): #evitar duplicacao de mesmas ações na esq e dir
                     continue
             if(piece[1]==l_end):
-                actions.append((piece[0],"left",index,0))
+                actions.append((piece[0],"left",index))
                 if(l_end==r_end):
                     continue
             if(piece[0]==r_end):
-                actions.append((piece[1],"right",index,1))
+                actions.append((piece[1],"right",index))
                 if(l_end==r_end):
                     continue
             if(piece[1]==r_end):
-                actions.append((piece[0],"right",index,0))
+                actions.append((piece[0],"right",index))
                 if(l_end==r_end):
                     continue
         '''
@@ -141,11 +141,11 @@ class Domino:
             return state
 
         if(l_end==r_end==-1):
-            p_index = action[4]
-            orientation = action[5]
+            p_index = action[3]
+            orientation = action[2]
         else:
             p_index = action[2]
-            orientation = action[3]
+            orientation = action[1]
 
         if status==1:
             p = p1_hand[p_index]
@@ -153,13 +153,13 @@ class Domino:
             p1_hand.remove(p)
             if (l_end==-1 and r_end==-1):
                 l_end, r_end = p
-            elif (l_end==p[0] and orientation == 1):#ori e o lado desejado a manter na ponta
+            elif (l_end==p[0] and orientation == "right"):#ori e o lado desejado a manter na ponta
                 l_end=p[1]
-            elif (l_end==p[1] and orientation == 0):
+            elif (l_end==p[1] and orientation == "left"):
                 l_end=p[0]
-            elif (r_end==p[0] and orientation == 1):
+            elif (r_end==p[0] and orientation == "right"):
                 r_end=p[1]
-            elif (r_end==p[1] and orientation == 0):
+            elif (r_end==p[1] and orientation == "left"):
                 r_end=p[0]
 
         state = [status, p1_hand, p2_hand, field, l_end, r_end]
