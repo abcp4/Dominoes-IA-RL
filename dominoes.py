@@ -64,6 +64,8 @@ class Domino:
         que no caso é o direito
 
         '''
+        if not actions:
+            actions.append(None)
         return actions
 
     def termination(self,state):#se a partida ja terminou
@@ -147,7 +149,10 @@ class Domino:
             elif(status == 1):
                 state[0] = 2
             return state
-
+        
+        if(status == 2): # o oponente foi bloqueado, mas eu tenho peça
+            state[0] = 1
+            
         if(l_end==r_end==-1):
             p_index = action[3]
             orientation = action[2]
