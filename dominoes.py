@@ -27,7 +27,7 @@ class Domino:
         if(l_end==r_end==-1):
             for piece in hand:
                 index +=1
-                actions.append((piece[0],piece[1],"left",index))
+                actions.append((piece[0],piece[1],index))
             return actions
 
         for piece in hand:
@@ -152,14 +152,14 @@ class Domino:
         
         if(status == 2): # o oponente foi bloqueado, mas eu tenho peça
             state[0] = 1
-            
+        p_index = action[2]  
         if(l_end==r_end==-1):
-            p_index = action[3]
-            orientation = action[2]
+            #p_index = action[3]
+            orientation = "left"
         else:
-            p_index = action[2]
+            #p_index = action[2]
             orientation = action[1]
-
+        print "p_index: " + str(p_index)
         p = hand[p_index]
         field.append(p)
         hand.remove(p)
