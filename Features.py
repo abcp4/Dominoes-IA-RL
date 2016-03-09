@@ -1,22 +1,37 @@
 import random
 import numpy as np
-import scipy
-import copy
 
 class Features:
-
-    def featureValues(self,state,action):
+    
+    def __init__(self,epsilon,beta,featureWeights):
+        self.data = []
+        e = epsilon # epsilon-greedy proportion
+        self.beta = beta
+        self.featureWeights = featureWeights
+        
+    def getFeaturesWeights(self):
+        return self.featureWeights
+    
+    def featureValues(self,state,action,player):
         numFeatures = 20
-        hand = state[1]
+        if(player == "p1"):
+            hand = state[1]
+        elif(player == "p2"):
+            hand = state[2]
         l_end = state[4]
         r_end = state[5]
-        
+        pos = action[2]
         result =  np.zeros(numFeatures)
-        if(action[1]=="left"):
+        if(l_end==r_end==-1):
+            pos = action[2]
+            l_end = action[0]
+            r_end = action[1]
+        elif(action[1]=="left"):
         #substitui uma das pontas pela nova ação
             l_end = action[0]
         else:
             r_end = action[0]
+        print "pos: "+str(pos)
         value =hand.pop(pos)
         """
         Características a partir de informações imperfeitas.
@@ -85,3 +100,32 @@ class Features:
         if(piece[0]==l_end or piece[0]==r_end or piece[1]==l_end or piece[1]==r_end):
                return True
         return False
+    
+#dado o jogador, sua acao, o estado e suas caracteristicas, retorne o valor dessa acao
+#e necessario diferencia os jogadores pois ele precisa examinar 2 hands 
+#o act n especifica de que hand e
+def qValue(state,act,features,player):
+    featureVals = features.featureValues(state,act,player)
+    val = np.dot (features.getFeaturesWeights(), featureVals)    # value before action
+    return val
+        
+def eGreedyPicker(actions,state,features,player):
+    rand = np.random.random_sample()
+    bestValue = -999999 #tomar cuidado aqui
+    if(rand > e):
+        for act in actions:
+            value = qValue(state,act,features,player)
+            if(value> bestValue):
+                bestValue = value
+                choosenAct = act
+    else:
+        choosenAct = random.choice(actions)
+        
+    return choosenAct
+
+def policyAct(state,player,features):
+    actions = dominoes.possibleActions(state,player)
+    #escolhe a partir dos valores na q-value com tecnica e-greedy
+    choosenAct = eGreedyPicker(actions,state,features,player)
+    
+    return choosenAct
