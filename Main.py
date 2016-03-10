@@ -85,3 +85,4 @@ while(dominoes.termination(state) == False):
     print state
     print "New Act: "
     print actP1
+   
