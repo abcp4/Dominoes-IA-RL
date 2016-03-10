@@ -32,6 +32,8 @@ def policyAct(state,player,features):
 
 def step(state,player,act):
     state = dominoes.playGame(state,act,player)                  # do selected action
+    print player + " played action : "+str(act)
+    print "now state is " + str(state)
     return state
 
 def evaluate(state,player,val,act,features,featureWeights,featuresVector):
@@ -58,31 +60,22 @@ duration = 0
 state = dominoes.startGame()
 print state
 actionss1 = dominoes.possibleActions(state,"p1")
-print "actions p1: "+str(actionss1)
 actP1 = policyAct(state,"p1",features)         # take action by a e-greedy policy
-print "Initial p1 choosen act: "+str(actP1)
 val1 = qValue(state,actP1,features,"p1")
 
 
 while(dominoes.termination(state) == False):
-#for i in range(0,1):
     #self-play, onde o jogador joga consigo mesmo, avaliado e aprendendo somente
     #como p1, e utilizando o q-value para fazer as jogadas do p2
     featuresVector = features.featureValues(state,actP1,"p1")#salva vetor de carac antes de mudar
     state = step(state,"p1",actP1)
     
     actionss2 = dominoes.possibleActions(state,"p2")
-    print "actions p2: "+str(actionss2)
     actP2 = policyAct(state,"p2",features)
-    print "p2 choosen act: "+str(actP2)
     state = step(state,"p2",actP2)
 
     #pega recompensas, atualiza as características e retorna novo
     #estado, valor e proxima acao
     state,val1,actP1,featureWeights =evaluate(state,"p1",val1,actP1,features,featureWeights,featuresVector)
     
-    print "state:"
-    print state
-    print "New Act: "
-    print actP1
    
