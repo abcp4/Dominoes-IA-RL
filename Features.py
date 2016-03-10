@@ -32,7 +32,7 @@ class Features:
                 l_end = action[0]
             else:
                 r_end = action[0]
-            print "pos: "+str(pos)
+            #print "pos: "+str(pos)
             value =hand.pop(pos)
         """
         Características a partir de informações imperfeitas.
