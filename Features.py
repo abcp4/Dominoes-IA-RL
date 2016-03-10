@@ -14,25 +14,26 @@ class Features:
     
     def featureValues(self,state,action,player):
         numFeatures = 20
+        result =  np.zeros(numFeatures)
+        l_end = state[4]
+        r_end = state[5]
         if(player == "p1"):
             hand = state[1]
         elif(player == "p2"):
             hand = state[2]
-        l_end = state[4]
-        r_end = state[5]
-        pos = action[2]
-        result =  np.zeros(numFeatures)
-        if(l_end==r_end==-1):
+        if(action[0]!=None):#quando nao for bloqueado    
             pos = action[2]
-            l_end = action[0]
-            r_end = action[1]
-        elif(action[1]=="left"):
-        #substitui uma das pontas pela nova ação
-            l_end = action[0]
-        else:
-            r_end = action[0]
-        print "pos: "+str(pos)
-        value =hand.pop(pos)
+            if(l_end==r_end==-1):
+                pos = action[2]
+                l_end = action[0]
+                r_end = action[1]
+            elif(action[1]=="left"):
+            #substitui uma das pontas pela nova ação
+                l_end = action[0]
+            else:
+                r_end = action[0]
+            print "pos: "+str(pos)
+            value =hand.pop(pos)
         """
         Características a partir de informações imperfeitas.
             Somente do que é visível a um jogador comum:
@@ -53,16 +54,17 @@ class Features:
         for i in range(7,14):
             #quais peças duplas temos na mão, de 0:0 a 6:6
             result[i] = self.hasDouble(i-7,hand,action)
-        
+                
         """
         Características a partir de informações perfeitas.
         Sabe-se da mão do oponente, de toda e qualquer informação necessária
         para se tomar uma decisão
         """
-        
-        hand.insert(pos,value)
+        if(action[0]!=None):
+            hand.insert(pos,value)
         
         return result
+    
     
     def NumDouble(self,hand,action,l_end,r_end,exp):
         count = 0
@@ -79,7 +81,9 @@ class Features:
                 return True
         return False
     
-    def blocksMe(self,hand,action,l_end,r_end):      
+    def blocksMe(self,hand,action,l_end,r_end):
+        if(action[0] is None):
+            return True
         for piece in hand:
             if(self.isPlayable(piece,l_end,r_end)):
                 #se encontra alguma peça valida na mao
@@ -98,34 +102,7 @@ class Features:
           
     def isPlayable(self,piece,l_end,r_end):#se dado a peça e as duas pontas, ela é jogavel
         if(piece[0]==l_end or piece[0]==r_end or piece[1]==l_end or piece[1]==r_end):
-               return True
+            return True
         return False
     
-#dado o jogador, sua acao, o estado e suas caracteristicas, retorne o valor dessa acao
-#e necessario diferencia os jogadores pois ele precisa examinar 2 hands 
-#o act n especifica de que hand e
-def qValue(state,act,features,player):
-    featureVals = features.featureValues(state,act,player)
-    val = np.dot (features.getFeaturesWeights(), featureVals)    # value before action
-    return val
-        
-def eGreedyPicker(actions,state,features,player):
-    rand = np.random.random_sample()
-    bestValue = -999999 #tomar cuidado aqui
-    if(rand > e):
-        for act in actions:
-            value = qValue(state,act,features,player)
-            if(value> bestValue):
-                bestValue = value
-                choosenAct = act
-    else:
-        choosenAct = random.choice(actions)
-        
-    return choosenAct
 
-def policyAct(state,player,features):
-    actions = dominoes.possibleActions(state,player)
-    #escolhe a partir dos valores na q-value com tecnica e-greedy
-    choosenAct = eGreedyPicker(actions,state,features,player)
-    
-    return choosenAct
