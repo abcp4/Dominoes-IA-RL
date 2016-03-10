@@ -87,36 +87,54 @@ class Domino:
         if(status == 3):
             p1_hand = state[1]
             p2_hand = state[2]
-            lowest_piece = 12
+            lighestP1Value = 13
+            lighestP2Value = 13
+            lighestP1Tile = 13
+            lighestP2Tile = 13
+            p1_total_value = 0
+            p2_total_value = 0
             for piece in p1_hand:
                 value = piece[0]+piece[1]
-                if(value < lowest_piece):
-                    lowest_piece = value
+                p1_total_value+=value
             for piece in p2_hand:
                 value = piece[0]+piece[1]
-                if(value < lowest_piece):
-                    state[0] = 5 #player 2 venceu tendo a menor peça no block
-                    if(player == "p1"):
-                        return -5 #recompensa negativa ao p1 pois perdeu
-                    else:
-                        return +5 #recompensa positiva ao p2 pois venceu
-            state[0] = 4#player 1 venceu tendo a menor peça no block
-            if(player == "p1"):
-                return +5 #recompensa negativa ao p1 pois venceu
-            else:
-                return -5 #recompensa positiva ao p2 pois perdeu
-
-            #evitar recalcular menor peça
-        elif(status == 4):
-            if(player == "p1"):
-                return +5 #recompensa negativa ao p1 pois venceu
-            else:
-                return -5 #recompensa positiva ao p2 pois perdeu
-        elif(status == 5):
-            if(player == "p1"):
-                return -5 #recompensa negativa ao p1 pois perdeu
-            else:
-                return +5 #recompensa positiva ao p2 pois venceu
+                p2_total_value+=value
+            if(p1_total_value<p2_total_value):
+                state[0] = 4#player 1 venceu tendo a menor mao
+                return 5
+            elif(p1_total_value>p2_total_value):
+                state[0] = 5#player 2 venceu tendo a menor mao
+                return -5
+            else:#empate
+                for piece in p1_hand:
+                    if(piece[0]<lighestP1Value):
+                        lighestP1Value = piece[0]
+                        lighestP1Tile = piece[0]+piece[1]
+                    if(piece[1]<lighestP1Value):
+                        lighestP1Value = piece[1]
+                        lighestP1Tile = piece[0]+piece[1]
+                        
+                for piece in p2_hand:
+                    if(piece[0]<lighestP2Value):
+                        lighestP2Value = piece[0]
+                        lighestP2Tile = piece[0]+piece[1]
+                    if(piece[1]<lighestP2Value):
+                        lighestP2Value = piece[1]
+                        lighestP2Tile = piece[0]+piece[1]
+                        
+                if(lighestP1Value<lighestP2Value):
+                    state[0] = 4#player 1 venceu tendo o menor valor entre o par das pecas
+                    return 5
+                elif(lighestP1Value>lighestP2Value):
+                    state[0] = 5#player 2 venceu tendo o menor valor entre o par das pecas
+                    return -5
+                else:
+                    if(lighestP1Tile<lighestP2Tile):#menor valor da peça como um todo
+                        state[0] = 4
+                        return 5
+                    else:#nao pode haver empate
+                        state[0] = 5
+                        return -5
 
     def startGame(self):
         status = 1 #1=in progress; 2=one player blocked;3=two players blocked;4/5=p1 won/p2 won
@@ -154,12 +172,9 @@ class Domino:
             state[0] = 1
         p_index = action[2]  
         if(l_end==r_end==-1):
-            #p_index = action[3]
             orientation = "left"
         else:
-            #p_index = action[2]
             orientation = action[1]
-        #print "p_index: " + str(p_index)
         p = hand[p_index]
         field.append(p)
         hand.remove(p)
