@@ -74,7 +74,7 @@ class Domino:
         p2_hand = state[2]
         l_end = state[4]
         r_end = state[5]
-        if (status == 3):
+        if (status >= 3):
             return True  
         return False
 
@@ -82,7 +82,7 @@ class Domino:
         #em caso de vitoria
         status = state[0]
 
-        if(status == 1):
+        if(status == 1 or status == 2):
             return 0
         if(status == 3):
             p1_hand = state[1]
@@ -100,7 +100,7 @@ class Domino:
                         return -5 #recompensa negativa ao p1 pois perdeu
                     else:
                         return +5 #recompensa positiva ao p2 pois venceu
-            state[0] = 4
+            state[0] = 4#player 1 venceu tendo a menor peça no block
             if(player == "p1"):
                 return +5 #recompensa negativa ao p1 pois venceu
             else:
@@ -143,7 +143,7 @@ class Domino:
         l_end = state[4]
         r_end = state[5]
 
-        if(action is None):#foi bloqueado
+        if(action[0] is None):#foi bloqueado
             if(status == 2):
                 state[0] = 3
             elif(status == 1):
@@ -159,7 +159,7 @@ class Domino:
         else:
             #p_index = action[2]
             orientation = action[1]
-        print "p_index: " + str(p_index)
+        #print "p_index: " + str(p_index)
         p = hand[p_index]
         field.append(p)
         hand.remove(p)
@@ -174,6 +174,9 @@ class Domino:
             state[1] = hand
         else:
             state[2] = hand
+            
+        if(len(hand) ==0): #zerou a mao, acabou o jogo
+            state[0] = 3
         state[3] = field
         state[4] = l_end
         state[5] = r_end
