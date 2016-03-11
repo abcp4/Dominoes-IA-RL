@@ -50,7 +50,7 @@ def evaluate(state,player,val,act,features,featureWeights,featuresVector):
     featureWeights += 0.5 * delta *featuresVector
     elements = [state,new_value,next_action,featureWeights]
     return elements
-    
+
 dominoes = Domino()
 e = 0.01 # variavel global
 featureWeights = np.zeros(20)
@@ -69,7 +69,7 @@ while(dominoes.termination(state) == False):
     #como p1, e utilizando o q-value para fazer as jogadas do p2
     featuresVector = features.featureValues(state,actP1,"p1")#salva vetor de carac antes de mudar
     state = step(state,"p1",actP1)
-    
+    print "valid features are: "+str(featuresVector)
     actionss2 = dominoes.possibleActions(state,"p2")
     actP2 = policyAct(state,"p2",features)
     state = step(state,"p2",actP2)
@@ -77,5 +77,6 @@ while(dominoes.termination(state) == False):
     #pega recompensas, atualiza as características e retorna novo
     #estado, valor e proxima acao
     state,val1,actP1,featureWeights =evaluate(state,"p1",val1,actP1,features,featureWeights,featuresVector)
-    
-   
+
+print "weights: "+str(featureWeights)
+
