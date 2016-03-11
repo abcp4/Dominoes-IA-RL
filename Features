@@ -1,4 +1,6 @@
 Retira-se a peça na mao para avaliar as caracteristicas
+
+Caracteristicas de imperfeita informação:
 NumDouble(1): Se o numero de peças duplas na mao é exatamente 1 
 NumDouble(2): Se o numero de peças duplas na mao é exatamente 2
 NumDouble(3): Se o numero de peças duplas na mao é maior ou igual a 3
@@ -7,3 +9,9 @@ NumActions(1) : se a ação me deixa com exatamente 1 peça jogável
 NumActions(2) : se a ação me deixa com exatamente 2 peças jogáveis
 NumActions(3) : se a ação me deixa com 3 ou mais peças jogáveis
 hasDouble(1-7): uma característica pra cada dupla especifica na mao
+
+Caracteristicas de perfeita informação:
+NumActions(4): Se a ação deixa o oponente com exatamente 1 peça jogável
+NumActions(5): Se a ação deixa o oponente com exatamente 2 peças jogáveis
+NumActions(6): Se a ação deixa o oponente com 3 ou mais peças jogáveis
+shortPiece(1-7): Se um oponente não tem um tipo de peça, de 0 a 6
