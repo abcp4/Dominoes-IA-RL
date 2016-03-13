@@ -4,13 +4,14 @@ Caracteristicas de imperfeita informação:
 NumDouble(1): Se o numero de peças duplas na mao é exatamente 1 
 NumDouble(2): Se o numero de peças duplas na mao é exatamente 2
 NumDouble(3): Se o numero de peças duplas na mao é maior ou igual a 3
-blocksMe() : Se a ação me deixa sem peça jogavel no campo atual
+blocks(1) : Se a ação me deixa sem peça jogavel no campo atual
 NumActions(1) : se a ação me deixa com exatamente 1 peça jogável
 NumActions(2) : se a ação me deixa com exatamente 2 peças jogáveis
 NumActions(3) : se a ação me deixa com 3 ou mais peças jogáveis
 hasDouble(1-7): uma característica pra cada dupla especifica na mao
 
 Caracteristicas de perfeita informação:
+blocks(2) : Se a ação deixa oponente sem peça jogavel no campo atual
 NumActions(4): Se a ação deixa o oponente com exatamente 1 peça jogável
 NumActions(5): Se a ação deixa o oponente com exatamente 2 peças jogáveis
 NumActions(6): Se a ação deixa o oponente com 3 ou mais peças jogáveis
