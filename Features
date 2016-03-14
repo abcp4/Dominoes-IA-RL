@@ -9,8 +9,8 @@ NumActions(1) : se a ação me deixa com exatamente 1 peça jogável
 NumActions(2) : se a ação me deixa com exatamente 2 peças jogáveis
 NumActions(3) : se a ação me deixa com 3 ou mais peças jogáveis
 hasPieceValue(1): tem na mão uma peça com valor >= 9 (soma dos lados)
-hasPieceValue(2): tem na mão uma peça com valor <=5 (soma dos lados)
-hasHandValue(1): tem o valor total das peças na mão <= 6
+hasPieceValue(2): tem na mão uma peça com valor <=4 (soma dos lados)
+hasHandValue(1): tem o valor total das peças na mão <= 4
 hasHandValue(1): tem o valor total das peças na mão >= 12 e <=19
 hasHandValue(1): tem o valor total das peças na mão >= 20 
 hasDouble(1-7): uma característica pra cada dupla especifica na mao
@@ -22,8 +22,8 @@ NumActions(4): Se a ação deixa o oponente com exatamente 1 peça jogável
 NumActions(5): Se a ação deixa o oponente com exatamente 2 peças jogáveis
 NumActions(6): Se a ação deixa o oponente com 3 ou mais peças jogáveis
 hasPieceValue(1): oponente tem na mão uma peça com valor >= 9 (soma dos lados)
-hasPieceValue(2): oponente tem na mão uma peça com valor <=5 (soma dos lados)
-hasHandValue(1): oponente tem o valor total das peças na mão <= 6
+hasPieceValue(2): oponente tem na mão uma peça com valor <=4 (soma dos lados)
+hasHandValue(1): oponente tem o valor total das peças na mão <= 4
 hasHandValue(1): oponente tem o valor total das peças na mão >= 12 e <=19
 hasHandValue(1): oponente tem o valor total das peças na mão >= 20
 shortPiece(1-7): Se um oponente não tem um tipo de peça, de 0 a 6
