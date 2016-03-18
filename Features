@@ -31,5 +31,6 @@ hasHandValue(1): oponente tem o valor total das peças na mão <= 4
 hasHandValue(1): oponente tem o valor total das peças na mão >= 12 e <=19
 hasHandValue(1): oponente tem o valor total das peças na mão >= 20
 shortPiece(1-7): Se um oponente não tem um tipo de peça, de 0 a 6
-
+*CanBeBlocked(1): Se ao fazer uma jogada, existir alguma peça do oponente que me bloqueie
+*BlockMyself(1): Se sabendo que o oponente esta bloqueado, a ação me deixa bloqueado
 *novas caracteristicas em teste
