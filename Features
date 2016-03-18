@@ -1,6 +1,7 @@
 Retira-se a peça na mao para avaliar as caracteristicas
 
 Caracteristicas de imperfeita informação:
+**twoSidePlay(1): Se a ação(antes de ser tomada) é valida nos dois lados
 NumDouble(1): Se o numero de peças duplas na mao é exatamente 1 
 NumDouble(2): Se o numero de peças duplas na mao é exatamente 2
 NumDouble(3): Se o numero de peças duplas na mao é maior ou igual a 3
