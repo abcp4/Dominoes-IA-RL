@@ -16,8 +16,9 @@ NumActions(3) : se a ação me deixa com 3 ou mais peças jogáveis
 hasPieceValue(1): tem na mão uma peça com valor >= 9 (soma dos lados)
 hasPieceValue(2): tem na mão uma peça com valor <=4 (soma dos lados)
 hasHandValue(1): tem o valor total das peças na mão <= 4
-hasHandValue(1): tem o valor total das peças na mão >= 12 e <=19
-hasHandValue(1): tem o valor total das peças na mão >= 20 
+hasHandValue(2): tem o valor total das peças na mão < 12
+hasHandValue(3): tem o valor total das peças na mão >= 12 e <=19
+hasHandValue(4): tem o valor total das peças na mão >= 20 
 hasDouble(1-7): uma característica pra cada dupla especifica na mao
 
 
@@ -29,8 +30,9 @@ NumActions(6): Se a ação deixa o oponente com 3 ou mais peças jogáveis
 hasPieceValue(1): oponente tem na mão uma peça com valor >= 9 (soma dos lados)
 hasPieceValue(2): oponente tem na mão uma peça com valor <=4 (soma dos lados)
 hasHandValue(1): oponente tem o valor total das peças na mão <= 4
-hasHandValue(1): oponente tem o valor total das peças na mão >= 12 e <=19
-hasHandValue(1): oponente tem o valor total das peças na mão >= 20
+hasHandValue(2): oponente tem o valor total das peças na mão < 12
+hasHandValue(3): oponente tem o valor total das peças na mão >= 12 e <=19
+hasHandValue(4): oponente tem o valor total das peças na mão >= 20
 shortPiece(1-7): Se um oponente não tem um tipo de peça, de 0 a 6
 *CanBeBlocked(1): Se ao fazer uma jogada, existir alguma peça do oponente que me bloqueie
 *BlockMyself(1): Se sabendo que o oponente esta bloqueado, a ação me deixa bloqueado
