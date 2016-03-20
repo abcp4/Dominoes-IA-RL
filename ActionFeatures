@@ -20,5 +20,5 @@ blocks: bloqueia os dois lados(contando mesmo se ja estiverem bloqueados)
 Force(1): o oponente a ter 5 ações a menos
 Force(1): o oponente a ter 3 ações a menos
 Force(1): o oponente a ter 2 ações a menos
-Force(1): o oponente a ter 2 ações a menos
+Force(1): o oponente a ter 1 ação a menos
 *ForceOnMine(1): o oponente a jogar somente uma peça no lado que coloquei a minha
