@@ -10,7 +10,7 @@ NumPoints(3):  perder 4 ou menos pontos na mão
 
 "No Campo" (informações imperfeitas)
 oneValue : o campo só tem 1 valor nas duas pontas
-numPlayed(0-6,x): fez o numero de peças desse valor já jogada menor ou igual a x
+numPlayed(0-6,x): fez o numero de peças desse valor já jogada menor que x
 allPlayed(0-6): ficar sem o referente valor em jogo
 
 "Na mão do oponente"(informações perfeitas)
