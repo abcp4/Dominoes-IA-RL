@@ -1,1 +1,9 @@
+Realiza-se uma ação a no estado S, levando a um after state Sa
+"fiquei" = "True se ação a me fez (expressão) " Obs: Se não foi a ação a que causou essas caracteristicas, então é dado com False
+
+NumDouble(1):  ficar sem doubles na mão
+NumDouble(2):  ficar com 1 double na mão
+NumPoints(1):  perder 10 ou mais pontos na mão
+NumPoints(2):  perder entre 5 a 9 pontos na mão
+NumPoints(3):  perder 4 ou menos pontos na mão
 
