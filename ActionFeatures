@@ -4,13 +4,18 @@ Realiza-se uma ação a no estado S, levando a um after state Sa
 "Na minha mão" (informações imperfeitas)
 NumDouble(1):  ficar sem doubles na mão
 NumDouble(2):  ficar com 1 double na mão
-NumPoints(1):  perder 10 ou mais pontos na mão
-NumPoints(2):  perder entre 5 a 9 pontos na mão
-NumPoints(3):  perder 4 ou menos pontos na mão
+NumPoints(1):  ficar com menos de 20 pontos na mão
+NumPoints(2):  ficar com menos de 10 pontos na mão
+NumPoints(3):  ficar com menos de 5 pontos na mão
 
 "No Campo" (informações imperfeitas)
-oneValue : o campo só tem 1 valor nas duas pontas
-numPlayed(0-6,x): fez o numero de peças desse valor já jogada menor que x
+oneValue : o campo só ter 1 valor nas duas pontas
+numPlayed(0-6,x):  o numero de peças desse valor já jogada fosse x
 allPlayed(0-6): ficar sem o referente valor em jogo
 
 "Na mão do oponente"(informações perfeitas)
+blockChance: o oponente ter a chance de me bloquear
+blocks: o oponente ser bloqueado
+Force(1): o oponente a jogar somente uma peça
+ForceOnMine(1): o oponente a jogar somente uma peça no lado que coloquei a minha
+ForceOnSide(1): o oponente a jogar somente uma peça no lado oposto a que coloquei a minha
