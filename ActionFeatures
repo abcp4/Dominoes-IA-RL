@@ -10,12 +10,15 @@ NumPoints(3):  ficar com menos de 5 pontos na mão
 
 "No Campo" (informações imperfeitas)
 oneValue : o campo só ter 1 valor nas duas pontas
-numPlayed(0-6,x):  o numero de peças desse valor já jogada fosse x
-allPlayed(0-6): ficar sem o referente valor em jogo
+numPlayed(x):  o numero de peças já jogadas de mesmo valor à esquerda da peça retirada ser igual a x
+numPlayed(x):  o numero de peças já jogadas de mesmo valor à direita da peça retirada ser igual a x
 
 "Na mão do oponente"(informações perfeitas)
-blockChance: o oponente ter a chance de me bloquear
-blocks: o oponente ser bloqueado
-Force(1): o oponente a jogar somente uma peça
-ForceOnMine(1): o oponente a jogar somente uma peça no lado que coloquei a minha
-ForceOnSide(1): o oponente a jogar somente uma peça no lado oposto a que coloquei a minha
+blockChance: o oponente ter a chance de me bloquear no lado que a peça ocupa
+blockOne: 'bloquear' um dos lados
+blocks: bloqueia os dois lados(contando mesmo se ja estiverem bloqueados)
+Force(1): o oponente a ter 5 ações a menos
+Force(1): o oponente a ter 3 ações a menos
+Force(1): o oponente a ter 2 ações a menos
+Force(1): o oponente a ter 2 ações a menos
+*ForceOnMine(1): o oponente a jogar somente uma peça no lado que coloquei a minha
