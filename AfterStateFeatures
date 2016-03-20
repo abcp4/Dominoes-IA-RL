@@ -1,9 +1,16 @@
 Realiza-se uma ação a no estado S, levando a um after state Sa
-"fiquei" = "True se ação a me fez (expressão) " Obs: Se não foi a ação a que causou essas caracteristicas, então é dado com False
+"fiquei" = "True se ação a  fez (expressão) " Obs: Se não foi a ação a que causou essas caracteristicas, então é dado com False
 
+"Na minha mão" (informações imperfeitas)
 NumDouble(1):  ficar sem doubles na mão
 NumDouble(2):  ficar com 1 double na mão
 NumPoints(1):  perder 10 ou mais pontos na mão
 NumPoints(2):  perder entre 5 a 9 pontos na mão
 NumPoints(3):  perder 4 ou menos pontos na mão
 
+"No Campo" (informações imperfeitas)
+oneValue : o campo só tem 1 valor nas duas pontas
+numPlayed(0-6,x): fez o numero de peças desse valor já jogada menor ou igual a x
+allPlayed(0-6): ficar sem o referente valor em jogo
+
+"Na mão do oponente"(informações perfeitas)
