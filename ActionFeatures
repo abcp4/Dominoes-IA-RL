@@ -4,8 +4,8 @@ Realiza-se uma ação a no estado S, levando a um after state Sa
 "Na minha mão" (informações imperfeitas)
 1 NumDouble(1):  ficar sem doubles na mão
 2 NumDouble(2):  ficar com 1 double na mão
-3 LostPoints(1):  perder 10 ou mais pontos na pedra jogada
-4 LostPoints(2):  perder de 5 a 9 pontos na pedra jogada
+3 LostPoints(1):  perder 9 ou mais pontos na pedra jogada
+4 LostPoints(2):  perder de 5 a 8 pontos na pedra jogada
 5 LostPoints(3):  perder 4 ou menos pontos na pedra jogada
 6-10 afterPieces(x:5-1):  ter x peças jogáveis a mais
 "No Campo" (informações imperfeitas)
