@@ -1,39 +1,26 @@
-Realiza-se uma ação a no estado S, levando a um after state Sa
-"fiquei" = "True se ação a  fez (expressão) " Obs: Se não foi a ação a que causou essas caracteristicas, então é dado com False
+"fiquei" = "True se ação a  fez (expressão) na minha mão " Obs: Se não foi a ação a que causou essas caracteristicas, então é False
+ (informações imperfeitas)
+ NumDouble(1):  ficar sem doubles na mão
+ NumDouble(2):  ficar com 1 double na mão
+ afterPieces(5-1):  ter x peças jogáveis a mais
+ oneValue : o campo só ter 1 valor nas duas pontas
+ numPlayed(3-8):  o numero de valores(0-6) já jogadas de mesmo valor aà esquerda e direita da peça inserida ser igual a x
+(informações perfeitas)
+ blockChance: o oponente ter a chance de me bloquear no lado que a peça ocupa
+ blockOne: 'bloquear' um dos lados
+ blocks: bloqueia os dois lados(contando mesmo se ja estiverem bloqueados)
+ Force(7-1): o oponente a ter x peças jogáveis a menos
+ Give(7-1): o oponente a ter x peças jogáveis a mais
+ shortPiece(6-0): qual valor x não há nas peças da mão do oponente
 
-"Na minha mão" (informações imperfeitas)
-1 NumDouble(1):  ficar sem doubles na mão
-2 NumDouble(2):  ficar com 1 double na mão
-3 LostPoints(1):  perder 9 ou mais pontos na pedra jogada
-4 LostPoints(2):  perder de 5 a 8 pontos na pedra jogada
-5 LostPoints(3):  perder 4 ou menos pontos na pedra jogada
-6-10 afterPieces(x:5-1):  ter x peças jogáveis a mais
-"No Campo" (informações imperfeitas)
-11 oneValue : o campo só ter 1 valor nas duas pontas
-11 numPlayed(1):  o numero de peças já jogadas de mesmo valor à esquerda da peça inserida ser igual a 3
-12 numPlayed(2):  o numero de peças já jogadas de mesmo valor à esquerda da peça inserida ser igual a 4
-13 numPlayed(3):  o numero de peças já jogadas de mesmo valor à esquerda da peça inserida ser igual a 5
-14 numPlayed(4):  o numero de peças já jogadas de mesmo valor à direita da peça inserida ser igual a 3
-15 numPlayed(5):  o numero de peças já jogadas de mesmo valor à direita da peça inserida ser igual a 4
-16 numPlayed(6):  o numero de peças já jogadas de mesmo valor à direita da peça inserida ser igual a 5
 
-"Na mão do oponente"(informações perfeitas)
-17 blockChance: o oponente ter a chance de me bloquear no lado que a peça ocupa
-18 blockOne: 'bloquear' um dos lados
-19 blocks: bloqueia os dois lados(contando mesmo se ja estiverem bloqueados)
-Force(1): o oponente a ter 7 peças jogáveis a menos
-Force(1): o oponente a ter 6 peças jogáveis a menos
-Force(1): o oponente a ter 5 peças jogáveis a menos
-Force(1): o oponente a ter 4 peças jogáveis a menos
-Force(1): o oponente a ter 3 peças jogáveis a menos
-Force(1): o oponente a ter 2 peças jogáveis a menos
-Force(1): o oponente a ter 1 peça jogável a menos
-Give(1): o oponente a ter 6 peças jogáveis a mais
-Give(1): o oponente a ter 7 peças jogáveis a mais
-Give(1): o oponente a ter 6 peças jogáveis a mais
-Give(1): o oponente a ter 5 peças jogáveis a mais
-Give(1): o oponente a ter 4 peças jogáveis a mais
-Give(1): o oponente a ter 3 peças jogáveis a mais
-Give(1): o oponente a ter 2 peças jogáveis a mais
-Give(1): o oponente a ter 1 peça jogável a mais
+
+
+
+
+
+
 *ForceOnMine(1): o oponente a jogar somente uma peça no lado que coloquei a minha
+ *LostPoints(1):  perder 9 ou mais pontos na pedra jogada
+ *LostPoints(2):  perder de 5 a 8 pontos na pedra jogada
+ *LostPoints(3):  perder 4 ou menos pontos na pedra jogada
