@@ -1,39 +1,51 @@
 Retira-se a peça na mao para avaliar as caracteristicas
 
-Caracteristicas de imperfeita informação:
-**twoSidePlay(1): Se a ação(antes de ser tomada) é valida nos dois lados
-NumDouble(1): Se o numero de peças duplas na mao é exatamente 1 
-NumDouble(2): Se o numero de peças duplas na mao é exatamente 2
-NumDouble(3): Se o numero de peças duplas na mao é maior ou igual a 3
 *HandSize(1): Se a mão tem tamanho <=3
 *HandSize(2): Se a mão tem tamanho >3
 *HandSize(3): Se a mão do oponente tem tamanho <=3
 *HandSize(4): Se a mão do oponente tem tamanho >3
-blocks(1) : Se a ação me deixa sem peça jogavel no campo atual
-NumActions(1) : se a ação me deixa com exatamente 1 peça jogável
-NumActions(2) : se a ação me deixa com exatamente 2 peças jogáveis
-NumActions(3) : se a ação me deixa com 3 ou mais peças jogáveis
-hasPieceValue(1): tem na mão uma peça com valor >= 9 (soma dos lados)
-hasPieceValue(2): tem na mão uma peça com valor <=4 (soma dos lados)
-hasHandValue(1): tem o valor total das peças na mão <= 4
-hasHandValue(2): tem o valor total das peças na mão < 12
-hasHandValue(3): tem o valor total das peças na mão >= 12 e <=19
-hasHandValue(4): tem o valor total das peças na mão >= 20 
-hasDouble(1-7): uma característica pra cada dupla especifica na mao
 
+
+(imperfeita informação)
+blocks(1) : Se a ação me deixa sem peça jogavel no campo atual
+NumActions(1) : se tenho exatamente 1 peça jogável
+NumActions(2) : se tenho exatamente 2 peças jogáveis
+NumActions(3) : se tenho 3 ou mais peças jogáveis
+hasPieceValue: tem na mão uma peça com valor >= 9 (soma dos lados)
+hasPieceValue: tem na mão uma peça com valor <=3 (soma dos lados)
+hasPieceValue: tem na mão uma peça com valor de 3 a 9 (soma dos lados)
+hasHandValue: tem o valor total das peças na mão <= 4
+hasHandValue: tem o valor total das peças na mão de 5 a 11
+hasHandValue: tem o valor total das peças na mão >= 12 e <=19
+hasHandValue: tem o valor total das peças na mão >= 20 
+wasBlocked: Se ja foi bloqueado na partida
+sameSideStart: Se iniciei a partida com 3 ou mais peças de mesmo lado
+sameSideStart: Se iniciei a partida com 3 ou menos peças de mesmo lado
+startHandValue: Se iniciei a partida com 35 ou menos pontos totais na mão
+startHandValue: Se iniciei a partida com 47 ou mais pontos totais na mão
+startHandValue: Se iniciei a partida com 35 a 47 pontos totais na mão
 
 Caracteristicas de perfeita informação:
-blocks(2) : Se a ação deixa oponente sem peça jogavel no campo atual
-NumActions(4): Se a ação deixa o oponente com exatamente 1 peça jogável
-NumActions(5): Se a ação deixa o oponente com exatamente 2 peças jogáveis
-NumActions(6): Se a ação deixa o oponente com 3 ou mais peças jogáveis
-hasPieceValue(1): oponente tem na mão uma peça com valor >= 9 (soma dos lados)
-hasPieceValue(2): oponente tem na mão uma peça com valor <=4 (soma dos lados)
+blocks(2) : Se o oponente não tem peça jogavel no campo atual
+NumActions: Se o oponente tem exatamente 1 peça jogável
+NumActions: Se  o oponente tem exatamente 2 peças jogáveis
+NumActions: Se o oponente tem 3 ou mais peças jogáveis
+hasPieceValue: oponente tem na mão uma peça com valor >= 9 (soma dos lados)
+hasPieceValue: oponente tem na mão uma peça com valor <=3 (soma dos lados)
+hasPieceValue: oponente tem na mão uma peça com valor de 4 a 8 (soma dos lados)
 hasHandValue(1): oponente tem o valor total das peças na mão <= 4
 hasHandValue(2): oponente tem o valor total das peças na mão < 12
-hasHandValue(3): oponente tem o valor total das peças na mão >= 12 e <=19
+hasHandValue(3): oponente tem o valor total das peças na mão de 12 a 19
 hasHandValue(4): oponente tem o valor total das peças na mão >= 20
 shortPiece(1-7): Se um oponente não tem um tipo de peça, de 0 a 6
+sameSideStart: Se oponente iniciou a partida com 3 ou mais peças de mesmo lado
+sameSideStart: Se oponente iniciou a partida com 3 ou menos peças de mesmo lado
+startHandValue: Se oponente iniciou a partida com 35 ou menos pontos totais na mão
+startHandValue: Se oponente iniciou a partida com 47 ou mais pontos totais na mão
+startHandValue: Se oponente iniciou a partida com 35 a 47 pontos totais na mão
+
+
+
 *CanBeBlocked(1): Se ao fazer uma jogada, existir alguma peça do oponente que me bloqueie
 *BlockMyself(1): Se sabendo que o oponente esta bloqueado, a ação me deixa bloqueado
 *novas caracteristicas em teste
